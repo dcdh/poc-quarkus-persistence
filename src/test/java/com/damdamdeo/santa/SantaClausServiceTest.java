@@ -3,6 +3,7 @@ package com.damdamdeo.santa;
 import com.damdamdamdeo.santa.Gift;
 import com.damdamdamdeo.santa.SantaClausService;
 import io.quarkus.test.junit.QuarkusTest;
+import org.hibernate.envers.AuditReaderFactory;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -30,6 +31,13 @@ public class SantaClausServiceTest {
         final List<Gift> gifts = em.createQuery("SELECT g FROM Gift g").getResultList();
         assertThat(gifts.size()).isEqualTo(1);
         assertThat(gifts.get(0).getName()).isEqualTo("Quarkus !");
+
+        final List<Gift> giftsAudited = AuditReaderFactory.get(em)
+                .createQuery()
+                .forRevisionsOfEntity(Gift.class, true, true)
+                .getResultList();
+        assertThat(giftsAudited.size()).isEqualTo(1);
+        assertThat(giftsAudited.get(0).getName()).isEqualTo("Quarkus !");
     }
 
 }
