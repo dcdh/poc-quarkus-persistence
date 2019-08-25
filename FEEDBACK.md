@@ -1,2 +1,2 @@
-start in dev mode   : OK
-run as native image : OK
+start in dev mode   : KO
+run as native image : KO

@@ -3,6 +3,7 @@ package com.damdamdeo.santa;
 import com.damdamdamdeo.santa.Gift;
 import com.damdamdamdeo.santa.SantaClausService;
 import io.quarkus.test.junit.QuarkusTest;
+import org.hibernate.envers.AuditReaderFactory;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -35,6 +36,14 @@ public class SantaClausServiceTest {
         final List<Gift> giftsSearched = santaClausService.searchGifts("Quarkus");
         assertThat(giftsSearched.size()).isEqualTo(1);
         assertThat(giftsSearched.get(0).getName()).isEqualTo("Quarkus !");
+
+        // envers
+        final List<Gift> giftsAudited = AuditReaderFactory.get(em)
+                .createQuery()
+                .forRevisionsOfEntity(Gift.class, true, true)
+                .getResultList();
+        assertThat(giftsAudited.size()).isEqualTo(1);
+        assertThat(giftsAudited.get(0).getName()).isEqualTo("Quarkus !");
     }
 
 }
