@@ -10,3 +10,21 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=santa
+
+  santa-search:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=password
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+      - http.cors.allow-credentials=true
+
+  santa-search-ui:
+    image: appbaseio/dejavu:3.3.0
+    ports:
+      - 1358:1358

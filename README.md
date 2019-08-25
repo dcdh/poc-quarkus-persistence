@@ -5,3 +5,9 @@
 > psql -d santa -U postgres
 
 > DROP SCHEMA public CASCADE;CREATE SCHEMA public;
+
+> http://localhost:1358/?appname=&url=&mode=edit
+
+> http://elastic:password@localhost:9200
+
+> com.damdamdamdeo.santa.gift

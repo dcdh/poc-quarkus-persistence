@@ -30,6 +30,11 @@ public class SantaClausServiceTest {
         final List<Gift> gifts = em.createQuery("SELECT g FROM Gift g").getResultList();
         assertThat(gifts.size()).isEqualTo(1);
         assertThat(gifts.get(0).getName()).isEqualTo("Quarkus !");
+
+        // search
+        final List<Gift> giftsSearched = santaClausService.searchGifts("Quarkus");
+        assertThat(giftsSearched.size()).isEqualTo(1);
+        assertThat(giftsSearched.get(0).getName()).isEqualTo("Quarkus !");
     }
 
 }
