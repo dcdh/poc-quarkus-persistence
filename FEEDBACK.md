@@ -1,2 +1,2 @@
 start in dev mode   : OK
-run as native image : KO
+run as native image : OK with quickwin
