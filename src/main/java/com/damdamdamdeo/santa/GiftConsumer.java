@@ -16,6 +16,7 @@ public class GiftConsumer {
     private final static Logger LOGGER = Logger.getLogger(GiftConsumer.class.getName());
 
     @Inject
+    @Consumer
     EntityManager em;
 
     @Incoming("gift")
