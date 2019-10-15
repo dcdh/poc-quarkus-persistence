@@ -1,17 +1,21 @@
 package com.damdamdamdeo.santa;
 
+import io.quarkus.arc.AlternativePriority;
+
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class ConsumerProducers {
+public class EntityManagerProducers {
 
     @Inject
     EntityManagerFactory emf;
 
     @Produces
-    @Consumer
+    @Dependent
+    @AlternativePriority(1)
     public EntityManager produceEntityManager() {
         return emf.createEntityManager();
     }

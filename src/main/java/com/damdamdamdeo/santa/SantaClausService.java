@@ -1,11 +1,11 @@
 package com.damdamdamdeo.santa;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-@ApplicationScoped
+@Dependent
 public class SantaClausService {
 
     @Inject
